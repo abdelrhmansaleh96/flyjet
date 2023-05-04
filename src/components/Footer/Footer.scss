@@ -1,0 +1,27 @@
+.bgImage {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.socialIcon {
+  transition: all 0.3s ease-in-out;
+  border: 1px solid rgb(170, 18, 18);
+  border-radius: 50%;
+  .social-svg-mask {
+    fill: rgb(25, 35, 45) !important;
+  }
+  .social-svg-icon {
+    fill: rgb(170, 18, 18) !important;
+  }
+  &:hover {
+    background-color: rgb(170, 18, 18);
+    .social-svg-icon {
+      fill: white !important;
+    }
+    .social-svg-mask {
+      fill: rgb(170, 18, 18) !important;
+    }
+  }
+}
