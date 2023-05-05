@@ -19,17 +19,9 @@ import { FaPlane } from "react-icons/fa";
 import logo from "../../assets/images/logo-main.png";
 import { motion } from "framer-motion";
 import { useScrollTrigger } from "@mui/material";
+import { useMainContext } from "../../context/mainContext";
+import { useTranslation } from "react-i18next";
 
-const pages = [
-  "Home",
-  "About us",
-  "Flight training",
-  "Services",
-  "Blog",
-  "Media",
-  "Contacts",
-  "Login",
-];
 interface Props {
   window?: () => Window;
 }
@@ -37,10 +29,26 @@ interface Props {
 function Header(props: Props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const { window } = props;
+  const { t, i18n } = useTranslation();
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
+
+  const { changeLanguage } = useMainContext();
+  const pages = [
+    t("header.home"),
+    t("header.aboutUs"),
+    t("header.flightTraining"),
+    t("header.Services"),
+    t("header.Blog"),
+    t("header.Media"),
+    t("header.contact"),
+    t("header.login"),
+  ];
   const drawer = (
     <Box
       onClick={handleDrawerToggle}
@@ -77,14 +85,6 @@ function Header(props: Props) {
       </List>
     </Box>
   );
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
-
-  // const trigger = useScrollTrigger({
-  //   disableHysteresis: true,
-  //   threshold: 100,
-  // });
-
   return (
     <motion.div
       initial={{ y: -200 }}
@@ -184,6 +184,28 @@ function Header(props: Props) {
                   </Typography>
                 </Button>
               ))}
+              <Button
+                sx={{
+                  my: 2,
+                  color: "white",
+                  display: "block",
+                }}
+                onClick={() => changeLanguage()}
+              >
+                <Typography
+                  textAlign="center"
+                  textTransform="none"
+                  sx={{
+                    fontSize: "clamp(.8rem, 1.5vw, 1.4rem)",
+                    "&:hover": {
+                      color: "secondary.main",
+                    },
+                  }}
+                >
+                  {i18n.language === "en" ? "AR" : "EN"}
+                </Typography>
+              </Button>
+
               <Box>
                 <Button
                   variant="contained"
@@ -203,7 +225,7 @@ function Header(props: Props) {
                     textTransform="none"
                     color={"white"}
                   >
-                    Apply now
+                    {t("header.applyNow")}
                   </Typography>
                 </Button>
               </Box>

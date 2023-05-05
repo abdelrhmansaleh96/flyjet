@@ -1,4 +1,4 @@
-import React, { useContext, useReducer, useState } from "react";
+import React, { useContext, useReducer } from "react";
 import reducer from "../reducers/main-reducer";
 import { createTheme } from "@mui/material";
 import createCache from "@emotion/cache";
@@ -14,9 +14,7 @@ const cacheLtr = createCache({
 
 const cacheRtl = createCache({
   key: "muirtl",
-  // prefixer is the only stylis plugin by default, so when
-  // overriding the plugins you need to include it explicitly
-  // if you want to retain the auto-prefixing behavior.
+
   stylisPlugins: [prefixer, rtlPlugin],
 });
 const ltrTheme = createTheme({
@@ -97,25 +95,14 @@ const rtlTheme = createTheme({
   },
   palette: {
     primary: {
-      main: "#b28e34",
+      light: "#8eddff",
+      main: "rgb( 41,47,69 )",
     },
     secondary: {
-      main: "#fff",
+      main: "rgb(234, 111, 102)",
     },
     custom: {
-      main: "#e8b83f",
-    },
-    customDark: {
-      main: "#707070",
-    },
-    greenMain: {
-      main: "#59C86F",
-    },
-    blueMain: {
-      main: "#0083DB",
-    },
-    grayMain: {
-      main: "#707070",
+      main: "rgb( 41,47,69 )",
     },
   },
   components: {

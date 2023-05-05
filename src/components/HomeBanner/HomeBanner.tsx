@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import React from "react";
 import banner from "../../assets/images/banner.jpg";
 
-const Banner = () => {
+const HomeBanner = () => {
   return (
     <Box
       sx={{
@@ -61,4 +61,4 @@ const Banner = () => {
   );
 };
 
-export default Banner;
+export default HomeBanner;
