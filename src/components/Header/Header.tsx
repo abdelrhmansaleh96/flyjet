@@ -21,6 +21,7 @@ import { motion } from "framer-motion";
 import { useScrollTrigger } from "@mui/material";
 import { useMainContext } from "../../context/mainContext";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   window?: () => Window;
@@ -40,14 +41,14 @@ function Header(props: Props) {
 
   const { changeLanguage } = useMainContext();
   const pages = [
-    t("header.home"),
-    t("header.aboutUs"),
-    t("header.flightTraining"),
-    t("header.Services"),
-    t("header.Blog"),
-    t("header.Media"),
-    t("header.contact"),
-    t("header.login"),
+    { name: t("header.home"), link: "/" },
+    { name: t("header.aboutUs"), link: "/about-us" },
+    { name: t("header.flightTraining") },
+    { name: t("header.Services") },
+    { name: t("header.Blog") },
+    { name: t("header.Media") },
+    { name: t("header.contact"), link: "/contact-us" },
+    { name: t("header.login") },
   ];
   const drawer = (
     <Box
@@ -74,17 +75,18 @@ function Header(props: Props) {
               my: 2,
               color: "white",
             }}
-            key={item}
+            key={item.name}
             disablePadding
           >
             <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
+              <ListItemText primary={item.name} />
             </ListItemButton>
           </ListItem>
         ))}
       </List>
     </Box>
   );
+  const navigate = useNavigate();
   return (
     <motion.div
       initial={{ y: -200 }}
@@ -163,11 +165,16 @@ function Header(props: Props) {
             <Box sx={{ display: { xs: "none", md: "flex" }, gap: "16px" }}>
               {pages.map((page) => (
                 <Button
-                  key={page}
+                  key={page.name}
                   sx={{
                     my: 2,
                     color: "white",
                     display: "block",
+                  }}
+                  onClick={() => {
+                    if (page.link) {
+                      navigate(page.link);
+                    }
                   }}
                 >
                   <Typography
@@ -180,7 +187,7 @@ function Header(props: Props) {
                       },
                     }}
                   >
-                    {page}
+                    {page.name}
                   </Typography>
                 </Button>
               ))}
